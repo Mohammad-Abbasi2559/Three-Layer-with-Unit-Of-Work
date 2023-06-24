@@ -1,6 +1,6 @@
-#Ignore .vscode
+#ignore .vscode
 .vscode
 
-#Ignore Obj and bin Folder
+#ignore Obj and bin Folder
 [Oo]bj
 bin

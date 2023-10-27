@@ -1,20 +1,20 @@
 ﻿using BLRazor.Connection;
 using Models;
 
-IConnectorBase connectorBase = new ConnectorBase();
+IUnitOfWork unitOfWork = new UnitOfWork();
 
 Person person = new();
 Console.WriteLine("Please Enter Your Name: ");
 person.Name = Console.ReadLine();
 
-connectorBase.Create(person);
-connectorBase.Commit();
+await unitOfWork.RepositoryBase<Person>().CreateAsync(person);
+await unitOfWork.CommitAsync();
 
-Person person1 = connectorBase.FindFirstByCondition<Person>(i => i.Name == person.Name);
+Person person1 = await unitOfWork.RepositoryBase<Person>().FindFirstByConditionAsync(i => i.Name == person.Name);
 
 
-if (person1 != null){
+if (person1 != null)
+{
     Console.WriteLine("True");
-}else
-    Console.WriteLine("False");
-    
+}
+else Console.WriteLine("False");

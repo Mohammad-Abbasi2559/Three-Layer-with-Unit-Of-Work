@@ -12,6 +12,8 @@ await unitOfWork.CommitAsync();
 
 Person person1 = await unitOfWork.RepositoryBase<Person>().FindFirstByConditionAsync(i => i.Name == person.Name);
 
+unitOfWork.Dispose();
+
 
 if (person1 != null)
 {

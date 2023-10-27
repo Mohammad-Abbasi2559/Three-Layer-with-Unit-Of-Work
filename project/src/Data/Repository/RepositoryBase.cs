@@ -4,11 +4,14 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace Data.Repository;
 
-public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity :class
+public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity :class
 {
     private readonly DbSet<TEntity> dbSet;
 
     public RepositoryBase(ConsoleContext context) =>  dbSet = context.Set<TEntity>();
+
+
+    public void Dispose() => GC.SuppressFinalize(this);
     
     
     public bool Exist(Expression<Func<TEntity, bool>> filter) => dbSet.Where(filter).Any();
